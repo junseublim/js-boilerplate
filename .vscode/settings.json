@@ -1,0 +1,12 @@
+{
+  "prettier.configPath": ".prettierrc",
+  "[json]": {
+    "breadcrumbs.showArrays": true,
+    "editor.quickSuggestions": {
+      "strings": true
+    },
+    "editor.suggest.insertMode": "replace"
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}
