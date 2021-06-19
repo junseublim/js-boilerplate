@@ -1,31 +1,32 @@
-const path = require("path");
-const ESLintPlugin = require("eslint-webpack-plugin");
+const path = require('path')
+const ESLintPlugin = require('eslint-webpack-plugin')
 
 module.exports = {
-  entry: ["@babel/polyfill", "./src/index.js"],
+  entry: './src/index.js',
   output: {
-    filename: "main.js",
-    path: path.resolve(__dirname, "dist"),
+    filename: '[name].[contenthash].js',
+    path: path.resolve(__dirname, 'dist'),
+    clean: true
   },
   module: {
     rules: [
       {
         test: /\.js$/,
-        include: [path.resolve(__dirname, "src/js")],
+        include: [path.resolve(__dirname, 'src')],
         exclude: /node_modules/,
-        use: [
-          {
-            loader: "babel-loader",
-            options: {
-              presets: ["@babel/preset-env"],
-            },
-          },
-          {
-            loader: "eslint-loader",
-          },
-        ],
-      },
-    ],
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', { useBuiltIns: 'entry' }]
+          }
+        }
+      }
+    ]
   },
   plugins: [new ESLintPlugin()],
-};
+  devServer: {
+    contentBase: './dist'
+  },
+  devtool: 'source-map',
+  mode: 'development'
+}
