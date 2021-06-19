@@ -1,6 +1,6 @@
 const path = require('path')
 const ESLintPlugin = require('eslint-webpack-plugin')
-
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
   entry: './src/index.js',
   output: {
@@ -17,13 +17,25 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', { useBuiltIns: 'entry' }]
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  useBuiltIns: 'entry'
+                }
+              ]
+            ]
           }
         }
       }
     ]
   },
-  plugins: [new ESLintPlugin()],
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Output Management'
+    }),
+    new ESLintPlugin()
+  ],
   devServer: {
     contentBase: './dist'
   },
